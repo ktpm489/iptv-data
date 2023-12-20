@@ -59,14 +59,18 @@ export default function Play() {
                 message: "No channel data found for this channel name",
               });
         });
+       
       });
+  
+    }
+    if (channelName) {
       db.favorLists.toArray().then((result) => {
         console.log('result favorLists',result)
         if (result?.length > 0) {
           const foundChannel = result.find(element => {
             return element.name ===  decodeURIComponent(channelName);
           });
-          // console.log('foundChannel', foundChannel)
+          console.log('foundChannel', foundChannel)
           if (foundChannel) {
             setCurrentFavorData(foundChannel)
             setId(foundChannel.id)
