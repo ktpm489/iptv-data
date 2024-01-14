@@ -273,24 +273,24 @@ export default function Play() {
                 </Box>
               ) : null}
               {
-                isAndroid ?  
                  ( currentChannelData?.url &&  <ReactHlsPlayer
                   src={currentChannelData?.url}
                   autoPlay
                   controls={true}
                     width="100%"
                     height="auto"
-                />) : (
-                  <>
-                <Hls version="latest" config={hlsConfig} poster="">
-                <source
-                  data-src={currentChannelData?.url}
-                  type="application/x-mpegURL"
-                />
-              </Hls>
-               <DefaultUi /> 
-                  </>
-                )
+                />) 
+              //    (
+              //     <>
+              //   <Hls version="latest" config={hlsConfig} poster="">
+              //   <source
+              //     data-src={currentChannelData?.url}
+              //     type="application/x-mpegURL"
+              //   />
+              // </Hls>
+              //  <DefaultUi /> 
+              //     </>
+              //   )
               }
              
             </Player>
