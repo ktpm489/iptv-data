@@ -13,6 +13,8 @@ import db from "./config/dexie";
 import "./css/play.css";
 import StarBorderIcon from '@mui/icons-material/StarBorder'
 import StarIcon from '@mui/icons-material/Star'
+import ReactHlsPlayer from 'react-hls-player';
+import { isAndroid } from 'react-device-detect';
 export default function Play() {
   const { channelName } = useParams();
   const [error, setError] = useState({ code: null, message: "" });
@@ -203,7 +205,6 @@ export default function Play() {
    * @see https://hls-js.netlify.app/api-docs/file/src/config.ts.html.
    */
   const hlsConfig = {
-    // ...
   };
 
   const handleFavorChannel = async () => {
@@ -271,15 +272,43 @@ export default function Play() {
                   <Typography variant="body1"> {error.message}</Typography>
                 </Box>
               ) : null}
-              <Hls version="latest" config={hlsConfig} poster="">
-                <source
-                  data-src={currentChannelData?.url}
-                  type="application/x-mpegURL"
-                />
-              </Hls>
-              <DefaultUi />
+              {
+                 ( currentChannelData?.url &&  <ReactHlsPlayer
+                  src={currentChannelData?.url}
+                  autoPlay
+                  controls={true}
+                    width="100%"
+                    height="auto"
+                />) 
+              //    (
+              //     <>
+              //   <Hls version="latest" config={hlsConfig} poster="">
+              //   <source
+              //     data-src={currentChannelData?.url}
+              //     type="application/x-mpegURL"
+              //   />
+              // </Hls>
+              //  <DefaultUi /> 
+              //     </>
+              //   )
+              }
+             
             </Player>
           </Box>
+          {/* <Box>
+            <p>{'Link'+ currentChannelData?.url}</p>
+            {
+              currentChannelData?.url &&  <ReactHlsPlayer
+              // src="https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.mp4/.m3u8"
+              src={currentChannelData?.url}
+              autoPlay
+              controls={true}
+                width="100%"
+                height="auto"
+            />
+            }
+         
+          </Box> */}
           <Box
             sx={{
               p: 2,
